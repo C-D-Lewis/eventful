@@ -86,8 +86,6 @@ void main_window_set_time(struct tm *tick_time) {
 }
 
 void main_window_set_unread_count(int count) {
-  count = 3;
-
   static char s_unread_buffer[8];
   snprintf(s_unread_buffer, sizeof(s_unread_buffer), "%d", count);
   text_layer_set_text(s_unread_layer, s_unread_buffer);
