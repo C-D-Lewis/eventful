@@ -13,9 +13,9 @@ static void window_load(Window *window) {
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
 
-  s_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_DS_DIGIB_50));
+  s_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_DS_DIGIB_60));
 
-  int top = PBL_IF_ROUND_ELSE(5, 0);
+  int top = PBL_IF_ROUND_ELSE(0, -5);
   int left = PBL_IF_ROUND_ELSE(42, 32);
   s_time_layer = text_layer_create(grect_inset(bounds, GEdgeInsets(top, 0, 0, 0)));
   text_layer_set_text_alignment(s_time_layer, GTextAlignmentCenter);
@@ -86,6 +86,8 @@ void main_window_set_time(struct tm *tick_time) {
 }
 
 void main_window_set_unread_count(int count) {
+  count = 3;
+
   static char s_unread_buffer[8];
   snprintf(s_unread_buffer, sizeof(s_unread_buffer), "%d", count);
   text_layer_set_text(s_unread_layer, s_unread_buffer);
