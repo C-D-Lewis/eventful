@@ -15,8 +15,8 @@ static void window_load(Window *window) {
 
   s_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_DS_DIGIB_60));
 
-  int top = PBL_IF_ROUND_ELSE(0, -5);
-  int left = PBL_IF_ROUND_ELSE(42, 32);
+  int top = PBL_IF_ROUND_ELSE(5, -6);
+  int left = PBL_IF_ROUND_ELSE(44, 32);
   s_time_layer = text_layer_create(grect_inset(bounds, GEdgeInsets(top, 0, 0, 0)));
   text_layer_set_text_alignment(s_time_layer, GTextAlignmentCenter);
   text_layer_set_text_color(s_time_layer, GColorWhite);
@@ -33,7 +33,9 @@ static void window_load(Window *window) {
   layer_add_child(window_layer, text_layer_get_layer(s_unread_layer));
 
   top = PBL_IF_ROUND_ELSE(100, 90);
-  s_event_layer = text_layer_create(grect_inset(bounds, GEdgeInsets(top, 0, 0, left)));
+  int bottom = PBL_IF_ROUND_ELSE(27, 0);
+  int right = PBL_IF_ROUND_ELSE(12, 0);
+  s_event_layer = text_layer_create(grect_inset(bounds, GEdgeInsets(top, right, bottom, left)));
   text_layer_set_text_alignment(s_event_layer, GTextAlignmentLeft);
   text_layer_set_text_color(s_event_layer, GColorWhite);
   text_layer_set_background_color(s_event_layer, GColorClear);
@@ -45,9 +47,9 @@ static void window_load(Window *window) {
   GSize icons_size = gbitmap_get_bounds(s_icons_bitmap).size;
 
   top = PBL_IF_ROUND_ELSE(78, 68);
-  left = 3;
-  const int bottom = bounds.size.h - top - icons_size.h;
-  const int right = bounds.size.w - left - icons_size.w;
+  left = PBL_IF_ROUND_ELSE(14, 3);
+  bottom = bounds.size.h - top - icons_size.h;
+  right = bounds.size.w - left - icons_size.w;
   s_icons_layer = bitmap_layer_create(grect_inset(bounds, GEdgeInsets(top, right, bottom, left)));
   bitmap_layer_set_compositing_mode(s_icons_layer, GCompOpSet);
   bitmap_layer_set_bitmap(s_icons_layer, s_icons_bitmap);
