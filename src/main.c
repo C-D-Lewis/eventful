@@ -48,6 +48,12 @@ static void in_recv_handler(DictionaryIterator *iter, void *context) {
   }
 }
 
+static void focus_handler(bool focused) {
+  if(focused) {
+    dash_api_get_data(DataTypeUnreadSMSCount, get_unread_count_callback);
+  }
+}
+
 static void init() {
   data_init();
   main_window_push();
@@ -62,6 +68,8 @@ static void init() {
   time_t now = time(NULL);
   struct tm *time_now = localtime(&now);
   tick_handler(time_now, MINUTE_UNIT);
+
+  events_app_focus_service_subscribe(focus_handler);
 }
 
 static void deinit() { }
